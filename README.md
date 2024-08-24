@@ -1,67 +1,24 @@
-<p align="center">
-  <img width="256" height="256" src="https://github.com/joshmedeski/sesh/blob/main/sesh-icon.png" />
-</p>
+# A Sesh Fork
 
-<h1 align="center">Sesh, the smart terminal session manager</h1>
+This is a [Sesh fork](https://github.com/joshmedeski/sesh) prior to v2.0.0.
 
-<p align="center">
-  <a href="https://github.com/joshmedeski/sesh/actions/workflows/ci-cd.yml">
-    <img alt="tests" src="https://github.com/joshmedeski/sesh/actions/workflows/ci-cd.yml/badge.svg" />
-  </a>
-  <a href="https://goreportcard.com/report/github.com/joshmedeski/sesh">
-    <img alt="goreport" src="https://goreportcard.com/badge/github.com/joshmedeski/sesh" />
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-</p>
+It is likely that I will not be keeping this fork up to date with the original repo as it working for what I need in terms of managing Tmux sessions.
 
-Sesh is a CLI that helps you create and manage tmux sessions quickly and easily using zoxide.
+The additional feature in this fork (a PR that was not merged in Sesh), is to allow for an extra list of paths `path_list` in the session configuration file `$HOME/.config/sesh/sesh.toml`. In this way, when the session is first created, it will also create additional windows within the session for each path in `path_list`. 
 
-<div style="width:50%">
-  <a href="https://youtu.be/-yX3GjZfb5Y?si=iFG8qNro1hmZjJFY" target="_blank">
-    <img src="./smart-tmux-sessions-with-sesh.jpeg" alt="Smart tmux sessions with sesh">
-  </a>
-</div>
+For example:
 
-Watch the video to learn more about how to use sesh to manage your tmux sessions.
-
-## How to install
-
-### Homebrew
-
-To install sesh, run the following [homebrew](https://brew.sh/) command:
-
-```sh
-brew install joshmedeski/sesh/sesh
+```toml
+[[session]]
+name = "Things"
+path = "~/Downloads"
+startup_command = "ls"
+path_list = ["~/Documents", "~/Dev"]
 ```
 
-### Go
+The main path is still the one defined in `path`, and the `startup_command` will only run in that window (i.e., in the `~/Downloads` window in the example above).
 
-Alternatively, you can install Sesh using Go's go install command:
-
-```sh
-go install github.com/joshmedeski/sesh@latest
-```
-
-This will download and install the latest version of Sesh. Make sure that your Go environment is properly set up.
-
-### Nix
-
-See the [nix package directory](https://search.nixos.org/packages?channel=unstable&show=sesh&from=0&size=50&sort=relevance&type=packages&query=sesh) for instructions on how to install sesh through the nix platform.
-
-**Note:** Do you want this on another package manager? [Create an issue](https://github.com/joshmedeski/sesh/issues/new) and let me know!
-
-## Raycast Extension
-
-The [sesh companion extension](https://www.raycast.com/joshmedeski/sesh) for [Raycast](https://www.raycast.com/) makes it easy to use sesh outside of the terminal.
-
-Here are limitations to keep in mind:
-
-- tmux has to be running before you can use the extension
-- The extension caches results for a few seconds, so it may not always be up to date
-
-<a title="Install sesh Raycast Extension" href="https://www.raycast.com/joshmedeski/sesh"><img src="https://www.raycast.com/joshmedeski/sesh/install_button@2x.png?v=1.1" height="64" alt="" style="height: 64px;"></a>
+The rest of this README is based on [Sesh](https://github.com/joshmedeski/sesh) prior to v2.0.0.
 
 ## How to use
 
